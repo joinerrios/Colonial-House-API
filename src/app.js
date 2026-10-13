@@ -1,10 +1,10 @@
+
 const express = require("express");
 
 const usuarioRoutes = require("./routes/usuarioRoutes");
 const dispositivoRoutes = require("./routes/dispositivoRoutes");
 
 const app = express();
-
 const PORT = 3000;
 
 app.use(express.json());
@@ -16,9 +16,12 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/usuarios", usuarioRoutes);
-
 app.use("/api/dispositivos", dispositivoRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Servidor funcionando en http://localhost:${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Servidor funcionando en http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
